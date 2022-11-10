@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Shopping List
+	</title>
+	<script src="https://unpkg.com/vue@2"></script>
+	<style>
+      .done {
+          color: mediumseagreen;
+          text-decoration: line-through;
+      }
+	</style>
+</head>
+<body>
+<div id="app">
+	<h1>Vue Slot</h1>
+	<todo-item>
+		Fix the car
+		<p>Please no more than $300.</p>
+	</todo-item>
+	<todo-item>
+		Make some coffee
+		<template #description>
+			<p>Let's make nice one.</p>
+		</template>
+	</todo-item>
+	<todo-item>
+		Clean the room
+		<template #button-text>
+			This is button text
+		</template>
+	</todo-item>
+</div>
+
+<script type="text/x-template" id="todo-item-template">
+	<div>
+		<label>
+			<input type="checkbox" v-model="completed">
+		</label>
+		<span :class="{done: completed}">
+			<slot></slot>
+		</span>
+		<slot name="description"></slot>
+		<button>
+			<slot name="button-text">Button Text</slot>
+		</button>
+	</div>
+</script>
+<script src="app.js"></script>
+</body>
+</html>
